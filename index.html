@@ -15,26 +15,27 @@
       /* ボタンのスタイルをここで定義 */
       #take-snapshot {
         position: fixed;
-        bottom: 20px;
+        bottom: 10%; /* 画面下部からの距離 */
         left: 50%;
         transform: translateX(-50%);
         border: none;
         background-color: #4CAF50; /* 緑色の背景 */
         color: white;
-        padding: 15px 32px;
+        padding: 20px 40px; /* タッチしやすいサイズに */
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
+        font-size: 18px; /* 読みやすいフォントサイズに */
         border-radius: 50%; /* 丸い形状 */
         cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* 影をつけて立体感を出す */
       }
 
       /* スマートフォン用のスタイル */
       @media (max-width: 768px) {
         #take-snapshot {
-          padding: 10px 20px;
-          font-size: 14px;
+          padding: 15px 30px;
+          font-size: 16px;
         }
       }
     </style>
@@ -42,31 +43,10 @@
   <body>
     <a-scene embedded arjs='sourceType: webcam;'>
       <!-- マーカー型ARコンテンツをここに追加 -->
-       <a-assets>
-                <a-asset-item
-                    id="animated-asset"
-                    src="assets/asset.glb"
-                ></a-asset-item>
-            </a-assets>
-     <a-marker
-                id="animated-marker"
-                type="pattern"
-                preset="custom"
-                url="assets/marker.patt"
-                raycaster="objects: .clickable"
-                emitevents="true"
-                cursor="fuse: false; rayOrigin: mouse;"
-                id="markerA"
-            >
-                <a-entity
-                    id="bowser-model"
-                    scale="0.15664050940343818 0.15664050940343818 0.15664050940343818"
-                    animation-mixer="loop: repeat"
-                    gltf-model="#animated-asset"
-                    class="clickable"
-                    gesture-handler
-                ></a-entity>
-            </a-marker>
+      <a-marker preset="hiro">
+        <!-- 3Dモデルをここに追加 -->
+        <a-box position='0 0.5 0' material='color: green;'></a-box>
+      </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
     <button id="take-snapshot">撮影</button>
