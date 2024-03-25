@@ -3,8 +3,43 @@
   <head>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      /* 全体のスタイルをここで定義 */
+      body {
+        margin: 0;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+      }
+
+      /* ボタンのスタイルをここで定義 */
+      #take-snapshot {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        border: none;
+        background-color: #4CAF50; /* 緑色の背景 */
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 50%; /* 丸い形状 */
+        cursor: pointer;
+      }
+
+      /* スマートフォン用のスタイル */
+      @media (max-width: 768px) {
+        #take-snapshot {
+          padding: 10px 20px;
+          font-size: 14px;
+        }
+      }
+    </style>
   </head>
-  <body style='margin : 0px; overflow: hidden;'>
+  <body>
     <a-scene embedded arjs='sourceType: webcam;'>
       <!-- マーカー型ARコンテンツをここに追加 -->
        <a-assets>
@@ -34,7 +69,7 @@
             </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
-    <button id="take-snapshot" style="position: fixed; bottom: 20px; left: 50%;">撮影</button>
+    <button id="take-snapshot">撮影</button>
     <script>
       document.getElementById('take-snapshot').addEventListener('click', function () {
         var scene = document.querySelector('a-scene');
@@ -52,4 +87,3 @@
     </script>
   </body>
 </html>
-
