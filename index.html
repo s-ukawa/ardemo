@@ -6,11 +6,32 @@
   </head>
   <body style='margin : 0px; overflow: hidden;'>
     <a-scene embedded arjs='sourceType: webcam;'>
-      <!-- ここにARコンテンツを追加します -->
-      <a-marker preset="hiro">
-        <!-- ここに3Dモデルを追加します -->
-        <a-box position='0 0.5 0' material='color: green;'></a-box>
-      </a-marker>
+      <!-- マーカー型ARコンテンツをここに追加 -->
+       <a-assets>
+                <a-asset-item
+                    id="animated-asset"
+                    src="assets/asset.glb"
+                ></a-asset-item>
+            </a-assets>
+     <a-marker
+                id="animated-marker"
+                type="pattern"
+                preset="custom"
+                url="assets/marker.patt"
+                raycaster="objects: .clickable"
+                emitevents="true"
+                cursor="fuse: false; rayOrigin: mouse;"
+                id="markerA"
+            >
+                <a-entity
+                    id="bowser-model"
+                    scale="0.15664050940343818 0.15664050940343818 0.15664050940343818"
+                    animation-mixer="loop: repeat"
+                    gltf-model="#animated-asset"
+                    class="clickable"
+                    gesture-handler
+                ></a-entity>
+            </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
     <button id="take-snapshot" style="position: fixed; bottom: 20px; left: 50%;">撮影</button>
@@ -31,3 +52,4 @@
     </script>
   </body>
 </html>
+
