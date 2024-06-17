@@ -17,7 +17,7 @@
             schema: {
               arobject: {type: 'selector'}
             },
-           init: function ()
+           init: function () {
                //マーカー検出/ロストの状態を管理する変数を定義しfalseで初期化
                this.isTracking=false;
                //markerFoundはマーカー検出時に呼ばれる
@@ -41,9 +41,14 @@ if(this.isTracking){
 //このスクリプトが適用されているオブジェクト(=マーカー)を取得
 var marker=this.el.object3D;
 //マーカーの位置を取得
-var p = new THREE.Vector3(); marker.getWorldPosition(p); //マーカーの姿勢 (向き)を取得
-var q = new THREE.Quaternion(); marker.getWorldQuaternion (q); //AR表示に用いるオブジェクトの位置・姿勢に反映
-var obj = this.data.arobject.object3D; obj.position.set(p.x, p.y, p.z);
+var p = new THREE.Vector3(); 
+marker.getWorldPosition(p);
+//マーカーの姿勢 (向き)を取得
+var q = new THREE.Quaternion();
+marker.getWorldQuaternion (q);
+//AR表示に用いるオブジェクトの位置・姿勢に反映
+var obj = this.data.arobject.object3D;
+obj.position.set(p.x, p.y, p.z);
 obj.quaternion.set (q.x, q.y, q.z, q.w);
 }
 }
@@ -124,7 +129,7 @@ obj.quaternion.set (q.x, q.y, q.z, q.w);
             <a-marker
                 id="animated-marker"
                 type="pattern"
-                makerhandler="arobject:#bowser-model"
+                markerhandler="arobject:#bowser-model"
                 preset="custom"
                 url="assets/marker.patt"
                 raycaster="objects: .clickable"
